@@ -1,4 +1,3 @@
----
 
 ## **1. Arquitectura del Proyecto**
 
@@ -7,18 +6,10 @@
 - **Estilos**: Tailwind CSS para el diseño responsivo y modular.
 - **UI Components**: Uso de componentes personalizados y de la biblioteca de UI `shadcn/ui` para mejorar la experiencia de usuario.
 - **Estado**: Se utiliza `useState` y `useEffect` para manejar el estado y hacer llamadas a las APIs.
-- **Autenticación (si aplica)**: Token de sesión o JWT para autenticar usuarios.
-
-### **Backend (si aplica):**
-- **API**: Se utilizan servicios API externos para obtener datos de productos más vendidos.
-- **Middleware**: Integración con Next.js para la funcionalidad SSR y CSR.
-- **Entorno**: Variables de entorno gestionadas con `.env` para almacenar claves API y otras configuraciones sensibles.
 
 ### **CI/CD:**
 - **Despliegue**: El proyecto se despliega en **Vercel**, que soporta despliegue automático para proyectos basados en Next.js.
 - **Integración Continua**: Cada vez que se realiza un `push` a la rama principal o de desarrollo, se ejecutan pipelines de CI para probar y construir la aplicación automáticamente.
-
----
 
 ## **2. Instrucciones de Despliegue y Ejecución Local**
 
@@ -113,5 +104,3 @@
 ```
 
 Este archivo puede personalizarse para configurar los rewrites, rutas y variables de entorno necesarias para el despliegue.
-
----
