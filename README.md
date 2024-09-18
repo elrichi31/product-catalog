@@ -1,36 +1,117 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+---
 
-## Getting Started
+## **1. Arquitectura del Proyecto**
 
-First, run the development server:
+### **Frontend:**
+- **Framework**: React con Next.js
+- **Estilos**: Tailwind CSS para el diseño responsivo y modular.
+- **UI Components**: Uso de componentes personalizados y de la biblioteca de UI `shadcn/ui` para mejorar la experiencia de usuario.
+- **Estado**: Se utiliza `useState` y `useEffect` para manejar el estado y hacer llamadas a las APIs.
+- **Autenticación (si aplica)**: Token de sesión o JWT para autenticar usuarios.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### **Backend (si aplica):**
+- **API**: Se utilizan servicios API externos para obtener datos de productos más vendidos.
+- **Middleware**: Integración con Next.js para la funcionalidad SSR y CSR.
+- **Entorno**: Variables de entorno gestionadas con `.env` para almacenar claves API y otras configuraciones sensibles.
+
+### **CI/CD:**
+- **Despliegue**: El proyecto se despliega en **Vercel**, que soporta despliegue automático para proyectos basados en Next.js.
+- **Integración Continua**: Cada vez que se realiza un `push` a la rama principal o de desarrollo, se ejecutan pipelines de CI para probar y construir la aplicación automáticamente.
+
+---
+
+## **2. Instrucciones de Despliegue y Ejecución Local**
+
+### **Requisitos Previos:**
+1. Node.js (versión 14 o superior).
+2. NPM o Yarn para gestionar dependencias.
+3. Cuenta en Vercel (para el despliegue en producción).
+
+### **Instalación Local:**
+1. Clona el repositorio:
+
+   ```bash
+   git clone https://github.com/tu_usuario/tu_repositorio.git
+   cd tu_repositorio
+   ```
+
+2. Instala las dependencias:
+
+   ```bash
+   npm install
+   ```
+
+   o
+
+   ```bash
+   yarn install
+   ```
+
+3. Crea un archivo `.env` en la raíz del proyecto con las variables necesarias (ejemplo):
+
+   ```
+   NEXT_PUBLIC_API_KEY=tu_api_key
+   NEXT_PUBLIC_API_URL=https://api.example.com
+   ```
+
+4. Ejecuta el servidor localmente:
+
+   ```bash
+   npm run dev
+   ```
+
+   o
+
+   ```bash
+   yarn dev
+   ```
+
+5. Abre el navegador y navega a `http://localhost:3000` para ver la aplicación.
+
+---
+
+## **3. Instrucciones de Despliegue en Vercel**
+
+### **Configuración de Vercel:**
+1. **Autenticación**:
+   - Inicia sesión en [Vercel](https://vercel.com/) o crea una cuenta si no tienes una.
+   
+2. **Conectar con el repositorio**:
+   - En el tablero de Vercel, selecciona "Nuevo Proyecto" y conecta tu repositorio de GitHub, GitLab o Bitbucket.
+
+3. **Configurar Variables de Entorno**:
+   - En la configuración del proyecto en Vercel, agrega las variables de entorno que definiste en el archivo `.env` bajo la sección "Environment Variables".
+
+4. **Despliegue Automático**:
+   - Vercel hará un despliegue automático cada vez que realices un `push` a la rama principal o a cualquier rama configurada en los ajustes del proyecto. El dominio de la aplicación será generado automáticamente.
+
+### **CI/CD con Vercel**:
+- **Branch Preview**: Vercel genera un preview deployment en cada `pull request` para que puedas ver cómo se verá la aplicación antes de fusionar cambios a la rama principal.
+- **Producción**: Cada vez que un `push` es hecho a la rama principal, Vercel construye y despliega la versión más reciente de la aplicación en tu dominio de producción.
+
+---
+
+## **4. Ejemplo de archivo de configuración `vercel.json`:**
+
+```json
+{
+  "version": 2,
+  "builds": [
+    { "src": "next.config.js", "use": "@vercel/next" }
+  ],
+  "env": {
+    "NEXT_PUBLIC_API_KEY": "@api_key",
+    "NEXT_PUBLIC_API_URL": "@api_url"
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://api.example.com/$1"
+    }
+  ]
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Este archivo puede personalizarse para configurar los rewrites, rutas y variables de entorno necesarias para el despliegue.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
